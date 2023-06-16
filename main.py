@@ -1,5 +1,5 @@
 from tupy import *
-from time import sleep
+
 
 class Tiro(Image):
   def update(self):
