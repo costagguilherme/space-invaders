@@ -25,6 +25,11 @@ shot1.y = spaceShip.y - 80
 shot1.scene = scene
 
 
+shot3 = Shot()
+shot3.x = spaceShip.x
+shot3.y = spaceShip.y - 130
+shot3.scene = scene
+
 
             
 run(globals())            

@@ -89,3 +89,4 @@ class Scene(Image):
             shot.x = self.spaceShip.x
             shot.y = self.spaceShip.y - 20
             shot.scene = self
+            shot.update()
