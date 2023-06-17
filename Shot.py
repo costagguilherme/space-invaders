@@ -11,7 +11,8 @@ class Shot(Image):
         if(self._collides_with(enemie)):
             print(f'colidiu como o inimigo n° {enemie.id}')
             enemie._hide()
+            enemie.destroy()
             self._hide()
             self.destroy()
-            enemie.destroy()
+            self.scene.enemies.remove(enemie)
 
