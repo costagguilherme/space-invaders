@@ -1,9 +1,9 @@
 from tupy import *
-from Scene import Scene
+from Battlefield import Battlefield
 
 
-scene = Scene()
-spaceShip = scene.generateSpaceShip()
-scene.generateEnemies()
+battlefield = Battlefield()
+spaceShip = battlefield.generateSpaceShip()
+battlefield.generateEnemies()
  
 run(globals())            

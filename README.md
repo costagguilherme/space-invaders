@@ -7,15 +7,19 @@
 2. Classe Shot
 - Representa o tiro
 
-4. Classe Scene
+4. Classe Battlefield
 - Gera os inimigos: método generateEnemies()
 - Gera a nave: método generateSpaceShip()
 - Gera os tiros dentro do update
 
-5. Coalisão
-- Feito no update da classe Shot, quando um tiro colide com um Enemie, ambos desaparecem
+
+5. Atirar
+- Apertar espaço
+
+6. Coalisão
+- Feito no update da classe Shot, quando um tiro colide com um inimigo, ambos desaparecem
 
 
-6. Movimentação da nave
+7. Movimentação da nave
 - Feito no update da classe SpaceShip, pressionar botões Left e Right, 
 

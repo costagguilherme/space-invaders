@@ -3,7 +3,7 @@ from Shot import Shot
 from Enemie import Enemie
 from SpaceShip import SpaceShip
 
-class Scene(Image):
+class Battlefield(Image):
     def __init__(self):
         self.enemies = []
         self.spaceShip = None
@@ -91,7 +91,7 @@ class Scene(Image):
             shot = shot
             shot.x = self.spaceShip.x
             shot.y = self.spaceShip.y - 20
-            shot.scene = self
+            shot.battlefield = self
             self.shots.append(shot)
 
 
@@ -99,4 +99,4 @@ class Scene(Image):
             shot.update()
 
         if (len(self.enemies) == 0):
-            toast("Parabéns, você salvou o universo!", 300000)
+            toast("Parabéns, você venceu!", 300000)

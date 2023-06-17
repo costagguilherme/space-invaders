@@ -3,16 +3,16 @@ from tupy import *
 class Shot(Image):
   def __init__(self):
       self.file = 'enemieV1.png'
-      self.scene = None
+      self.battlefield = None
 
   def update(self):
-    self.y-=4
-    for enemie in self.scene.enemies:
+    self.y-=5
+    for enemie in self.battlefield.enemies:
         if(self._collides_with(enemie)):
             print(f'colidiu como o inimigo n° {enemie.id}')
             enemie.destroy()
             self.destroy()
-            self.scene.enemies.remove(enemie)
-            self.scene.shots.remove(self)
+            self.battlefield.enemies.remove(enemie)
+            self.battlefield.shots.remove(self)
 
 
