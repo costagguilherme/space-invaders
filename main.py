@@ -66,6 +66,9 @@ class Scene(Image):
     def __init__(self):
         self.enemies = []
         self.spaceShip = None
+        self.file = 'cenary.jpg'
+        self.x = 450
+        self.y = 250
 
     def generateEnemies(self):
         enemieId = 1
@@ -149,6 +152,7 @@ class Scene(Image):
 
 
 scene = Scene()
+
 spaceShip = scene.generateSpaceShip()
 scene.generateEnemies()
 
@@ -157,6 +161,7 @@ shot = Shot()
 shot.x = spaceShip.x
 shot.y = spaceShip.y - 20
 shot.scene = scene
+
 
 
             
