@@ -13,4 +13,6 @@ class Shot(Image):
             enemie.destroy()
             self.destroy()
             self.scene.enemies.remove(enemie)
+            self.scene.shots.remove(self)
+
 

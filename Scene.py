@@ -10,6 +10,8 @@ class Scene(Image):
         self.file = 'cenary.jpg'
         self.x = 450
         self.y = 250
+        self.currentShot = None
+        self.shots = []
 
     def generateEnemies(self):
         enemieId = 1
@@ -86,7 +88,15 @@ class Scene(Image):
     def update(self):
         if keyboard.is_key_just_down('space'):
             shot = Shot()
+            shot = shot
             shot.x = self.spaceShip.x
             shot.y = self.spaceShip.y - 20
             shot.scene = self
+            self.shots.append(shot)
+
+
+        for shot in self.shots:
             shot.update()
+        # if (self.currentShot is not None):
+        #     print('nao é nulo')
+        #     self.currentShot.update()
