@@ -97,6 +97,6 @@ class Scene(Image):
 
         for shot in self.shots:
             shot.update()
-        # if (self.currentShot is not None):
-        #     print('nao é nulo')
-        #     self.currentShot.update()
+
+        if (len(self.enemies) == 0):
+            toast("Parabéns, você salvou o universo!", 300000)

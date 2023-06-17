@@ -6,7 +6,7 @@ class Shot(Image):
       self.scene = None
 
   def update(self):
-    self.y-=1
+    self.y-=4
     for enemie in self.scene.enemies:
         if(self._collides_with(enemie)):
             print(f'colidiu como o inimigo n° {enemie.id}')
