@@ -23,3 +23,4 @@
 7. Movimentação da nave
 - Feito no update da classe SpaceShip, pressionar botões Left e Right, 
 
+teste
