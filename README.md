@@ -10,9 +10,7 @@
 4. Classe Scene
 - Gera os inimigos: método generateEnemies()
 - Gera a nave: método generateSpaceShip()
-- Gera os tiros: método generateShot()
-- O tiro é gerado quando o space é pressionado
-
+- Gera os tiros dentro do update
 
 5. Coalisão
 - Feito no update da classe Shot, quando um tiro colide com um Enemie, ambos desaparecem
