@@ -86,7 +86,7 @@ class Battlefield(Image):
         return spaceShip
     
     def update(self):
-        if keyboard.is_key_just_down('space'):
+        if keyboard.is_key_just_down('space') and len(self.shots) < 3:
             shot = Shot()
             shot = shot
             shot.x = self.spaceShip.x

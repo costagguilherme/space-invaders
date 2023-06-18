@@ -5,40 +5,38 @@ class SpaceShip(Image):
         self.file = 'spaceship.png'
         self.contador = 0
     
-    def vira_direita(self):
+    def turn_right(self):
+        if self.file == 'spaceship.png':
+            self.file = 'spaceshipV2right.png'
+            self.angle -= 10
         if self.file == 'spaceshipV2right.png':
-            self.x += 5
+            self.x = self.x + 5
+            self.contador = self.contador + 1
+        if self.contador == 15:
+            self.file = 'spaceshipV3right.png'
             self.contador += 1
-        elif self.file == 'spaceshipV3right.png':
-            self.x += 10
+        if self.file == 'spaceshipV3right.png':
+            self.x = self.x + 10
+
+    def turn_left(self):
+        if self.file == 'spaceship.png':
+            self.file = 'spaceshipV2left.png'
+            self.angle += 10
+        if self.file == 'spaceshipV2left.png':
+            self.x = self.x - 5
+            self.contador = self.contador + 1
+        if self.contador == 15:
+            self.file = 'spaceshipV3left.png'
+            self.contador += 1
+        if self.file == 'spaceshipV3left.png':
+            self.x = self.x -10
 
     def update(self):
         if keyboard.is_key_down('Right'):
-            if self.file == 'spaceship.png':
-                self.file = 'spaceshipV2right.png'
-            if self.contador == 15:
-                self.file = 'spaceshipV3right.png'
-            if self.file == 'spaceshipV2right.png':
-                self.x += 7
-                self.contador +=1
-            elif self.file == 'spaceshipV3right.png':
-                self.x += 12
-        
-        if keyboard.is_key_up('Right'):
+            self.turn_right()
+        if keyboard.is_key_up('Right') and keyboard.is_key_up('Left'):
             self.file = 'spaceship.png'
             self.contador = 0
-
+            self.angle = 0
         if keyboard.is_key_down('Left'):
-            if self.file == 'spaceship.png':
-                self.file = 'spaceshipV2left.png'
-            if self.contador == 15:
-                self.file = 'spaceshipV3left.png'
-            if self.file == 'spaceshipV2left.png':
-                self.x -= 7
-                self.contador +=1
-            elif self.file == 'spaceshipV3left.png':
-                self.x -= 12
-        
-        if keyboard.is_key_up('Left'):
-            self.file = 'spaceship.png'
-            self.contador = 0
+            self.turn_left()
