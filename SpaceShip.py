@@ -4,8 +4,9 @@ class SpaceShip(Image):
     def __init__(self):
         self.file = 'spaceship.png'
         self.contador = 0
+        self.lifes = 3
     
-    def turn_right(self):
+    def turnRight(self):
         if self.file == 'spaceship.png':
             self.file = 'spaceshipV2right.png'
             self.angle -= 10
@@ -18,7 +19,7 @@ class SpaceShip(Image):
         if self.file == 'spaceshipV3right.png':
             self.x = self.x + 10
 
-    def turn_left(self):
+    def turnLeft(self):
         if self.file == 'spaceship.png':
             self.file = 'spaceshipV2left.png'
             self.angle += 10
@@ -33,10 +34,10 @@ class SpaceShip(Image):
 
     def update(self):
         if keyboard.is_key_down('Right'):
-            self.turn_right()
+            self.turnRight()
         if keyboard.is_key_up('Right') and keyboard.is_key_up('Left'):
             self.file = 'spaceship.png'
             self.contador = 0
             self.angle = 0
         if keyboard.is_key_down('Left'):
-            self.turn_left()
+            self.turnLeft()
