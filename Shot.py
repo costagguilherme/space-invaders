@@ -1,11 +1,11 @@
 from tupy import *
 
 class Shot(Image):
-  def __init__(self):
+  def __init__(self) -> None:
       self.file = 'spaceship_shot.png'
       self._battlefield = None
 
-  def update(self):
+  def update(self) -> None:
     self.y-=30
     for enemie in self._battlefield._enemies:
         if(self._collides_with(enemie)):
@@ -19,7 +19,7 @@ class Shot(Image):
 
 
 class EnemieShot(Shot):
-   def update(self):
+   def update(self) -> None:
       self.y+=5
       if(self.y > 500):
           self.destroy()

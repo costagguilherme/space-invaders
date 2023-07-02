@@ -1,12 +1,12 @@
 from tupy import *
 
 class SpaceShip(Image):
-    def __init__(self):
+    def __init__(self) -> None:
         self.file = 'spaceship.png'
-        self._contador = 0
+        self._contador: int = 0
         self._lifes = 3
     
-    def turnRight(self):
+    def turnRight(self) -> None:
         if self.file == 'spaceship.png':
             self.file = 'spaceshipV2right.png'
             self.angle -= 10
@@ -19,7 +19,7 @@ class SpaceShip(Image):
         if self.file == 'spaceshipV3right.png':
             self.x = self.x + 10
 
-    def turnLeft(self):
+    def turnLeft(self) -> None:
         if self.file == 'spaceship.png':
             self.file = 'spaceshipV2left.png'
             self.angle += 10
@@ -32,7 +32,7 @@ class SpaceShip(Image):
         if self.file == 'spaceshipV3left.png':
             self.x = self.x -10
 
-    def update(self):
+    def update(self) -> None:
         if keyboard.is_key_down('Right'):
             self.turnRight()
         if keyboard.is_key_up('Right') and keyboard.is_key_up('Left'):

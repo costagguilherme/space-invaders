@@ -1,9 +1,9 @@
-from tupy import *
+from tupy import Image
 
 class Enemie(Image):
-    def __init__(self):
+    def __init__(self) -> None:
         self.file = 'enemieV1.png'
-        self._id = 0
+        self._id: int = 0
 
-    def setId(self, id):
+    def setId(self, id: int) -> None:
         self._id = id
