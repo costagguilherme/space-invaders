@@ -9,11 +9,11 @@ class Timer:
       self._counter += 1
 
    @property
-   def ticked(self):
+   def ticked(self) -> bool:
       return self._counter % self._interval == 0
 
    @property
-   def ticks(self):
+   def ticks(self) -> int:
       return self._counter // self._interval
 
 class Animacao(Image):

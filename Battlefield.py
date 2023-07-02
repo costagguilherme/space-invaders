@@ -10,7 +10,6 @@ from typing import List
 class Battlefield(Image):
     def __init__(self) -> None:
         self._enemies: List[Enemie] = []
-        self._spaceShip: SpaceShip = None
         self.file = 'cenary.jpg'
         self.x = 450
         self.y = 250
