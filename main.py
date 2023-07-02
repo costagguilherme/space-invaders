@@ -6,4 +6,4 @@ battlefield = Battlefield()
 spaceShip = battlefield.generateSpaceShip()
 battlefield.generateEnemies()
  
-run(globals())            
+run(globals())  # type: ignore
