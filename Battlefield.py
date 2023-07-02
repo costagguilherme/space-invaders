@@ -43,12 +43,7 @@ class Battlefield(Image):
     def update(self) -> None:
         # Lógica para gerar os tiros da nave
         if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._lifes > 0:
-            shot = Shot()
-            shot = shot
-            shot.x = self._spaceShip.x
-            shot.y = self._spaceShip.y - 20
-            shot._battlefield = self
-            self._shots.append(shot)
+            self.generateSpaceShipShot()
 
         # Updates
         for shot in self._shots:
@@ -75,8 +70,19 @@ class Battlefield(Image):
             shot = EnemieShot()
             shot.x = enemie.x
             shot.y = enemie.y + 20
-            shot._battlefield = self
+            shot._spaceShip = self._spaceShip
             self._enemieShots.append(shot)
+            shot._enemieShots = self._enemieShots
+
+
+    def generateSpaceShipShot(self) -> None:
+        shot = Shot()
+        shot = shot
+        shot.x = self._spaceShip.x
+        shot.y = self._spaceShip.y - 20
+        shot._enemies = self._enemies
+        self._shots.append(shot)
+        shot._shots = self._shots
 
     def hasEnemieShotOnXcoordinate(self, xCoordinate: int) -> bool:
         for enemieShot in self._enemieShots:

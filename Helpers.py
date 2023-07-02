@@ -17,7 +17,7 @@ class Timer:
       return self._counter // self._interval
 
 class Animacao(Image):
-   def __init__(self, files, interval) -> None:
+   def __init__(self, files: str, interval: int) -> None:
       self.files: str = files
       self._timer: Timer = Timer(interval)
 
