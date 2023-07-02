@@ -33,7 +33,7 @@ class Battlefield(Image):
                 xCoordinate += 65
                 enemyId += 1
 
-    def generateSpaceShip(self) -> None:
+    def generateSpaceShip(self) -> SpaceShip:
         spaceShip = SpaceShip()
         spaceShip.x = 450
         spaceShip.y = 460
