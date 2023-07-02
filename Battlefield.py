@@ -5,20 +5,20 @@ from Enemie import Enemie
 from SpaceShip import SpaceShip
 from random import randint
 from Helpers import Timer
+from typing import List
 
 class Battlefield(Image):
-    def __init__(self):
-        self.enemies = []
-        self.spaceShip = None
+    def __init__(self) -> None:
+        self._enemies: List[Enemie] = []
+        self._spaceShip: SpaceShip = None
         self.file = 'cenary.jpg'
         self.x = 450
         self.y = 250
-        self.currentShot = None
-        self.shots = []
-        self.enemieShots = []
-        self.timer = Timer(15)
+        self._shots: List[Shot] = []
+        self._enemieShots: List[EnemieShot] = []
+        self._timer: Timer = Timer(15)
 
-    def generateEnemies(self):
+    def generateEnemies(self) -> None:
         enemyId = 1
         coordinates = [(60, 20), (60, 50), (60, 80), (60, 110), (60, 140)]
 
@@ -28,59 +28,59 @@ class Battlefield(Image):
                 enemy = Enemie()
                 enemy.x = xCoordinate
                 enemy.y = yCoordinate
-                enemy.id = enemyId
-                self.enemies.append(enemy)
+                enemy.setId(enemyId)
+                self._enemies.append(enemy)
                 xCoordinate += 65
                 enemyId += 1
 
-    def generateSpaceShip(self):
+    def generateSpaceShip(self) -> None:
         spaceShip = SpaceShip()
         spaceShip.x = 450
         spaceShip.y = 460
-        self.spaceShip = spaceShip
-        toast(f'Vidas: {spaceShip.lifes}')
+        self._spaceShip = spaceShip
+        toast(f'Vidas: {spaceShip._lifes}')
         return spaceShip
         
-    def update(self):
+    def update(self) -> None:
         # Lógica para gerar os tiros da nave
-        if keyboard.is_key_just_down('space') and len(self.shots) < 3:
+        if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._lifes > 0:
             shot = Shot()
             shot = shot
-            shot.x = self.spaceShip.x
-            shot.y = self.spaceShip.y - 20
-            shot.battlefield = self
-            self.shots.append(shot)
+            shot.x = self._spaceShip.x
+            shot.y = self._spaceShip.y - 20
+            shot._battlefield = self
+            self._shots.append(shot)
 
         # Updates
-        for shot in self.shots:
+        for shot in self._shots:
             shot.update()
             
-        for enemieShot in self.enemieShots:
+        for enemieShot in self._enemieShots:
             enemieShot.update()
 
         # Lógica para gerar os tiros do inimigo
-        self.timer.update()
-        if (len(self.enemies) - 1) >= 0:
-            if self.timer.ticked and len(self.enemieShots) < 3:
+        self._timer.update()
+        if (len(self._enemies) - 1) >= 0:
+            if self._timer.ticked and len(self._enemieShots) < 3:
                 self.generateEnemieShot()
 
         # Jogador venceu
-        if (len(self.enemies) == 0):
+        if (len(self._enemies) == 0):
             toast("Parabéns, você venceu!", 300000)
 
-    def generateEnemieShot(self):
-        randomEnemie = randint(0, len(self.enemies) - 1)
-        enemie = self.enemies[randomEnemie]
+    def generateEnemieShot(self) -> None:
+        randomEnemie = randint(0, len(self._enemies) - 1)
+        enemie = self._enemies[randomEnemie]
         # A coordenada x só pode ter um tiro por vez
         if not self.hasEnemieShotOnXcoordinate(enemie.x):
             shot = EnemieShot()
             shot.x = enemie.x
             shot.y = enemie.y + 20
-            shot.battlefield = self
-            self.enemieShots.append(shot)
+            shot._battlefield = self
+            self._enemieShots.append(shot)
 
-    def hasEnemieShotOnXcoordinate(self, xCoordinate):
-        for enemieShot in self.enemieShots:
+    def hasEnemieShotOnXcoordinate(self, xCoordinate: int) -> bool:
+        for enemieShot in self._enemieShots:
             if enemieShot.x == xCoordinate:
                 return True
         return False
