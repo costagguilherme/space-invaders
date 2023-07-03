@@ -5,7 +5,16 @@ from Enemie import Enemie
 from SpaceShip import SpaceShip
 from random import randint
 from Helpers import Timer
-from typing import List
+from typing import List, Optional
+import pygame
+import threading
+from Wall import Wall
+
+def tocar_audio(caminho_arquivo : str) -> None:
+    pygame.mixer.init()
+    pygame.mixer.music.load(caminho_arquivo)
+    pygame.mixer.music.play()
+
 
 class Battlefield(Image):
     def __init__(self) -> None:
@@ -16,6 +25,7 @@ class Battlefield(Image):
         self._shots: List[Shot] = []
         self._enemieShots: List[EnemieShot] = []
         self._timer: Timer = Timer(15)
+        self._wall: Optional[Wall] = None
 
     def generateEnemies(self) -> None:
         enemyId = 1
@@ -44,6 +54,7 @@ class Battlefield(Image):
         # Lógica para gerar os tiros da nave
         if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._lifes > 0:
             self.generateSpaceShipShot()
+            threading.Thread(target=tocar_audio, args=('assets/shot.mp3',)).start()
 
         # Updates
         for shot in self._shots:
@@ -61,6 +72,11 @@ class Battlefield(Image):
         # Jogador venceu
         if (len(self._enemies) == 0):
             toast("Parabéns, você venceu!", 300000)
+        
+        self._wall.update()
+
+    def generateWall(self) -> None:
+        self._wall = Wall()
 
     def generateEnemieShot(self) -> None:
         randomEnemie = randint(0, len(self._enemies) - 1)
@@ -73,6 +89,8 @@ class Battlefield(Image):
             shot._spaceShip = self._spaceShip
             self._enemieShots.append(shot)
             shot._enemieShots = self._enemieShots
+            shot._wall = self._wall
+            
 
 
     def generateSpaceShipShot(self) -> None:
@@ -83,6 +101,8 @@ class Battlefield(Image):
         shot._enemies = self._enemies
         self._shots.append(shot)
         shot._shots = self._shots
+        shot._battlefield = self
+        shot._wall = self._wall
 
     def hasEnemieShotOnXcoordinate(self, xCoordinate: int) -> bool:
         for enemieShot in self._enemieShots:
