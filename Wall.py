@@ -4,23 +4,23 @@ import random
 class Wall(Image):
     def __init__(self) -> None:
         self.file : str = 'wall.png'
-        self.limiter : int = 35
+        self._limiter : int = 35
         self.x : int =500
         self.y : int = 350
-        self.sentido : str = random.choice(['left','right'])
+        self._sense : str = random.choice(['left','right'])
 
 
     def turnRight(self) -> None:
-        if self.x >= 100 and self.sentido == 'right':
+        if self.x >= 100 and self._sense == 'right':
              self.x += 10
         if self.x == 750:
-            self.sentido = 'left'
+            self._sense = 'left'
     
     def turnLeft(self) -> None:
-        if self.x <= 750 and self.sentido == 'left':
+        if self.x <= 750 and self._sense == 'left':
              self.x -= 10
         if self.x == 100:
-            self.sentido = 'right'
+            self._sense = 'right'
 
     def update(self) -> None:
         self.turnLeft()

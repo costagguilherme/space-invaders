@@ -6,15 +6,9 @@ from SpaceShip import SpaceShip
 from random import randint
 from Helpers import Timer
 from typing import List, Optional
-import pygame
 import threading
 from Wall import Wall
-
-def tocar_audio(caminho_arquivo : str) -> None:
-    pygame.mixer.init()
-    pygame.mixer.music.load(caminho_arquivo)
-    pygame.mixer.music.play()
-
+from Audio import Audio
 
 class Battlefield(Image):
     def __init__(self) -> None:
@@ -26,6 +20,7 @@ class Battlefield(Image):
         self._enemieShots: List[EnemieShot] = []
         self._timer: Timer = Timer(15)
         self._wall: Optional[Wall] = None
+        self._audio: Audio = Audio()
 
     def generateEnemies(self) -> None:
         enemyId = 1
@@ -54,7 +49,7 @@ class Battlefield(Image):
         # Lógica para gerar os tiros da nave
         if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._lifes > 0:
             self.generateSpaceShipShot()
-            threading.Thread(target=tocar_audio, args=('assets/shot.mp3',)).start()
+            threading.Thread(target=self._audio.play('assets/shot.mp3')).start()
 
         # Updates
         for shot in self._shots:
@@ -62,6 +57,8 @@ class Battlefield(Image):
             
         for enemieShot in self._enemieShots:
             enemieShot.update()
+
+        self._wall.update()
 
         # Lógica para gerar os tiros do inimigo
         self._timer.update()
@@ -72,8 +69,6 @@ class Battlefield(Image):
         # Jogador venceu
         if (len(self._enemies) == 0):
             toast("Parabéns, você venceu!", 300000)
-        
-        self._wall.update()
 
     def generateWall(self) -> None:
         self._wall = Wall()
@@ -91,7 +86,6 @@ class Battlefield(Image):
             shot._enemieShots = self._enemieShots
             shot._wall = self._wall
             
-
 
     def generateSpaceShipShot(self) -> None:
         shot = Shot()
