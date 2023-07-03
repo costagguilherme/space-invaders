@@ -3,12 +3,14 @@ from Enemie import Enemie
 from SpaceShip import SpaceShip
 from typing import List
 from typing import Union
+from Wall import Wall
 
 class Shot(Image):
   def __init__(self) -> None:
       self.file = 'spaceship_shot.png'
       self._enemies: List[Enemie] = []
       self._shots: List[Shot] = []
+      self._wall : Union[Wall, None] = None
 
   def update(self) -> None:
     self.y-=30
@@ -22,16 +24,22 @@ class Shot(Image):
         self.destroy()
         self._shots.remove(self)
 
+    if isinstance(self._wall, Wall):
+        if self._collides_with(self._wall):
+            self.destroy()
+            self._shots.remove(self)
+
 
 class EnemieShot(Shot):
    def __init__(self) -> None:
       super().__init__()
+      self.file = 'enemie_spaceship_shot.png'
       self._spaceShip: Union[SpaceShip, None] = None
       self._enemieShots: List[EnemieShot] = []
 
 
    def update(self) -> None:
-      self.y+=5
+      self.y+=25
       if(self.y > 500):
           self.destroy()
           self._enemieShots.remove(self)
@@ -47,5 +55,11 @@ class EnemieShot(Shot):
                 toast(f'Vidas: {self._spaceShip._lifes}, você perdeu', 100000)
                 self._spaceShip.destroy()
                 self._spaceShip._hide()
+    
+      if isinstance(self._wall, Wall):
+        if self._collides_with(self._wall):
+            self.destroy()
+            self._enemieShots.remove(self)
+
 
 
