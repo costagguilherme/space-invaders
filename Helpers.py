@@ -1,4 +1,5 @@
 from tupy import *
+from typing import List
 
 class Timer:
    def __init__(self, interval: int) -> None:
@@ -17,8 +18,8 @@ class Timer:
       return self._counter // self._interval
 
 class Animacao(Image):
-   def __init__(self, files: str, interval: int) -> None:
-      self.files: str = files
+   def __init__(self, files: List[str], interval: int) -> None:
+      self.files: List[str] = files
       self._timer: Timer = Timer(interval)
 
    def update(self) -> None:

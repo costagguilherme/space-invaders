@@ -3,11 +3,11 @@ import random
 
 class Wall(Image):
     def __init__(self) -> None:
-        self.file : str = 'wall.png'
+        self.file = 'wall.png'
         self._limiter : int = 35
-        self.x : int =500
-        self.y : int = 350
-        self._sense : str = random.choice(['left','right'])
+        self.x =500
+        self.y = 350
+        self._sense: str = random.choice(['left','right'])
 
 
     def turnRight(self) -> None:

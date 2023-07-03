@@ -1,6 +1,6 @@
 from tupy import *
 from Shot import Shot
-from Shot import EnemieShot
+from EnemieShot import EnemieShot
 from Enemie import Enemie
 from SpaceShip import SpaceShip
 from random import randint
@@ -49,7 +49,7 @@ class Battlefield(Image):
         # Lógica para gerar os tiros da nave
         if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._lifes > 0:
             self.generateSpaceShipShot()
-            threading.Thread(target=self._audio.play('assets/shot.mp3')).start()
+            threading.Thread(target=self.playShotSound, args=(self._audio, 'assets/shot.mp3')).start()
 
         # Updates
         for shot in self._shots:
@@ -58,7 +58,8 @@ class Battlefield(Image):
         for enemieShot in self._enemieShots:
             enemieShot.update()
 
-        self._wall.update()
+        if isinstance(self._wall, Wall):
+            self._wall.update()
 
         # Lógica para gerar os tiros do inimigo
         self._timer.update()
@@ -66,9 +67,22 @@ class Battlefield(Image):
             if self._timer.ticked and len(self._enemieShots) < 3:
                 self.generateEnemieShot()
 
+
+        # Coalisão entre o tiro da nave e o tiro do inimigo
+        for spaceShipShot in self._shots:
+            for enemieShot in self._enemieShots:
+                if spaceShipShot._collides_with(enemieShot):
+                    self._shots.remove(spaceShipShot)
+                    self._enemieShots.remove(enemieShot)
+                    spaceShipShot.destroy()
+                    enemieShot.destroy()
+
         # Jogador venceu
         if (len(self._enemies) == 0):
             toast("Parabéns, você venceu!", 300000)
+
+    def playShotSound(self, audio: Audio, path: str) -> None:
+        audio.play(path)
 
     def generateWall(self) -> None:
         self._wall = Wall()
@@ -95,7 +109,6 @@ class Battlefield(Image):
         shot._enemies = self._enemies
         self._shots.append(shot)
         shot._shots = self._shots
-        shot._battlefield = self
         shot._wall = self._wall
 
     def hasEnemieShotOnXcoordinate(self, xCoordinate: int) -> bool:
