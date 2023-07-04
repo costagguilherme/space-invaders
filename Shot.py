@@ -15,8 +15,8 @@ class Shot(Image):
     self.y-=30
     for enemie in self._enemies:
         if(self._collides_with(enemie)):
-            enemie.destroy()
             self.destroy()
+            enemie.destroy()
             self._enemies.remove(enemie)
             self._shots.remove(self)
     if(self.y < 0):
@@ -27,6 +27,7 @@ class Shot(Image):
         if self._collides_with(self._wall):
             self.destroy()
             self._shots.remove(self)
+      
 
 
 

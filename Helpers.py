@@ -17,13 +17,3 @@ class Timer:
    def ticks(self) -> int:
       return self._counter // self._interval
 
-class Animacao(Image):
-   def __init__(self, files: List[str], interval: int) -> None:
-      self.files: List[str] = files
-      self._timer: Timer = Timer(interval)
-
-   def update(self) -> None:
-      self._timer.update()
-      self.file = self.files[self._timer.ticks % len(self.files)]
-      if self._timer.ticked:
-         toast('tick', 100)
