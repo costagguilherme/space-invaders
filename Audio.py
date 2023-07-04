@@ -1,8 +1,9 @@
+import os
 import pygame
 
-
-class Audio():
+class Audio:
     def play(self, path: str) -> None:
         pygame.mixer.init()
-        pygame.mixer.music.load(path)
+        file_path = os.path.join("assets", path)  # Constrói o caminho correto para o arquivo
+        pygame.mixer.music.load(file_path)
         pygame.mixer.music.play()

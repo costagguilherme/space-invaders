@@ -18,7 +18,7 @@ class Battlefield(Image):
         self.y = 250
         self._shots: List[Shot] = []
         self._enemieShots: List[EnemieShot] = []
-        self._timer: Timer = Timer(15)
+        self._timer: Timer = Timer(2)
         self._wall: Optional[Wall] = None
         self._audio: Audio = Audio()
 
@@ -42,16 +42,18 @@ class Battlefield(Image):
         spaceShip.x = 450
         spaceShip.y = 460
         self._spaceShip = spaceShip
-        toast(f'Vidas: {spaceShip._lifes}')
         return spaceShip
         
     def update(self) -> None:
         # Lógica para gerar os tiros da nave
-        if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._lifes > 0:
+        if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._life._lifes > 0:
             self.generateSpaceShipShot()
-            threading.Thread(target=self.playShotSound, args=(self._audio, 'assets/shot.mp3')).start()
+            threading.Thread(target=self.playShotSound, args=(self._audio, 'shot.mp3')).start()
 
         # Updates
+
+        self._spaceShip._life.update()
+
         for shot in self._shots:
             shot.update()
             
