@@ -12,6 +12,9 @@ class Shot(Image):
       self._wall : Union[Wall, None] = None
 
   def update(self) -> None:
+    """
+        Verifica a coalisão do tiro da nave com o inimigo
+    """
     self.y-=30
     for enemie in self._enemies:
         if(self._collides_with(enemie)):

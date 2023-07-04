@@ -9,6 +9,7 @@ from typing import List, Optional
 import threading
 from Wall import Wall
 from Audio import Audio
+from KeyboardEnum import KeyboardEnum
 
 class Battlefield(Image):
     def __init__(self) -> None:
@@ -45,8 +46,14 @@ class Battlefield(Image):
         return spaceShip
         
     def update(self) -> None:
+        """
+            Gera os tiros da nave
+            Faz os updates de: Shot, EnemieShot e Wall
+            Verifica a coalisão dos tiros da nave e do tiro inimigo
+        """
+
         # Lógica para gerar os tiros da nave
-        if keyboard.is_key_just_down('space') and len(self._shots) < 3 and self._spaceShip._life._lifes > 0:
+        if keyboard.is_key_just_down(KeyboardEnum.SPACE.value) and len(self._shots) < 3 and self._spaceShip._life._lifes > 0:
             self.generateSpaceShipShot()
             threading.Thread(target=self.playShotSound, args=(self._audio, 'shot.mp3')).start()
 

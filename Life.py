@@ -8,6 +8,9 @@ class Life(Image):
         self.y = 440
 
     def update(self) -> None:
+        """
+            Alterna imagens que representam as vidas da nave
+        """
         if self._lifes == 3:
             self._file = 'Vidas3.png'
         elif self._lifes == 2:

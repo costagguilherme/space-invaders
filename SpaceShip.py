@@ -1,5 +1,6 @@
 from tupy import *
 from Life import Life
+from KeyboardEnum import KeyboardEnum
 
 
 class SpaceShip(Image):
@@ -35,11 +36,14 @@ class SpaceShip(Image):
             self.x = self.x -13
 
     def update(self) -> None:
-        if keyboard.is_key_down('Right'):
+        """
+            Faz a movimentação da nave
+        """
+        if keyboard.is_key_down(KeyboardEnum.RIGHT.value):
             self.turnRight()
-        if keyboard.is_key_up('Right') and keyboard.is_key_up('Left'):
+        if keyboard.is_key_up(KeyboardEnum.RIGHT.value) and keyboard.is_key_up(KeyboardEnum.LEFT.value):
             self.file = 'spaceship.png'
             self._contador = 0
             self.angle = 0
-        if keyboard.is_key_down('Left'):
+        if keyboard.is_key_down(KeyboardEnum.LEFT.value):
             self.turnLeft()
