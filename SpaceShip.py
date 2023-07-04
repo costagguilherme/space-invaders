@@ -1,12 +1,12 @@
 from tupy import *
-from Lifes import Lifes
+from Life import Life
 
 
 class SpaceShip(Image):
     def __init__(self) -> None:
         self.file = 'spaceship.png'
         self._contador: int = 0
-        self._life = Lifes()
+        self._life = Life()
     
     def turnRight(self) -> None:
         if self.file == 'spaceship.png':

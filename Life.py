@@ -1,11 +1,11 @@
 from tupy import *
 
-class Lifes(Image):
+class Life(Image):
     def __init__(self) -> None:
-        self._lifes : int = 3
+        self._lifes: int = 3
         self._file = 'Vidas3.png'
-        self.x : int = 80
-        self.y : int = 440
+        self.x = 80
+        self.y = 440
 
     def update(self) -> None:
         if self._lifes == 3:
