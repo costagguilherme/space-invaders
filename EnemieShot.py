@@ -18,7 +18,7 @@ class EnemieShot(Shot):
         Destrói o tiro caso ele ultrapasse o limite da tela
         Verifica a coalisão do tiro inimigo com a nave
       """
-      self.y+=19
+      self.y+=15
       if(self.y > 500):
           self.destroy()
           self._enemieShots.remove(self)
